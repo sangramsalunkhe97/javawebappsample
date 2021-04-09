@@ -20,7 +20,7 @@ node {
   
     stage('deploy') {
       def resourceGroup = 'QuickstartJenkins-rg'
-      def webAppName = 'SangramWebApp'
+      def webAppName = 'myserviceapp'
       // login Azure
       withCredentials([usernamePassword(credentialsId: 'd9da1349-763f-4809-b1f8-54282e69d488', passwordVariable: 'ahntr7LtJBn9_n02AtSA1WQf08sDOpBn1G', usernameVariable: 'http://myappservice')]) {
        sh '''
