@@ -9,7 +9,9 @@ def getFtpPublishProfile(def publishProfilesJson) {
 
 node {
   withEnv(['AZURE_SUBSCRIPTION_ID=e9a5817b-a6ea-44dc-b95b-bd6a9371aef1',
-        'AZURE_TENANT_ID=0adb040b-ca22-4ca6-9447-ab7b049a22ff']) {
+        'AZURE_TENANT_ID=0adb040b-ca22-4ca6-9447-ab7b049a22ff',
+          'AZURE_CLIENT_ID=3872c5f3-4c1d-4ca9-9649-8052776774fc',
+          'AZURE_CLIENT_SECRET=ahntr7LtJBn9_n02AtSA1WQf08sDOpBn1G']) {
     stage('init') {
       checkout scm
     }
@@ -24,7 +26,7 @@ node {
       // login Azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrinciple', passwordVariable: 'ahntr7LtJBn9_n02AtSA1WQf08sDOpBn1G', usernameVariable: '3872c5f3-4c1d-4ca9-9649-8052776774fc')]) {
        sh '''
-          az login --service-principal -u $3872c5f3-4c1d-4ca9-9649-8052776774fc -p $ahntr7LtJBn9_n02AtSA1WQf08sDOpBn1G -t $AZURE_TENANT_ID
+          az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
           az account set -s $AZURE_SUBSCRIPTION_ID
         '''
       }
